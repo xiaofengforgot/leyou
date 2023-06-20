@@ -23,8 +23,8 @@ public class UserController2 {
     public ResponseEntity<Boolean> check(@PathVariable String value, @PathVariable String type) {
         //手机，查询数据库是否有这个手机号；
         //用户名，查询数据库是否有这个手机号；
-        Boolean flag = userService2.exist(value, type);
-        return ResponseEntity.ok(flag);
+        Boolean flag = userService2.isExist(value, type);
+        return ResponseEntity.ok(!flag);
     }
 
     @PostMapping("/code2")
@@ -35,5 +35,10 @@ public class UserController2 {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/register2")
+    public ResponseEntity<String> register(String username, String password, String confirmPassword, String phone, String code) {
+        return userService2.register(username, password, confirmPassword, phone, code);
     }
 }
